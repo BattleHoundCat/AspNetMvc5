@@ -1,0 +1,54 @@
+﻿@model IEnumerable<StreetASP.Models.Street>
+
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2>List of Streets</h2>
+
+<h6>Search Street</h6>
+@using (Html.BeginForm("DisplayAll", "Home", FormMethod.Get))
+{
+    <p>
+        Title: @Html.TextBox("SearchString") <br />
+        <input type="submit" value="Search" />
+    </p>
+}
+<table>
+    <tr>
+        <th>Street Name</th>
+        <th>Country Name</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Country.Name)
+    </td>
+    <td>
+        <div class="btn btn-success">
+            @Html.ActionLink("Edit Street Name", "EditStreetName", new {  id = item.Id})
+        </div>
+
+    </td>
+    <td>
+        <div class="btn btn-success">
+            @Html.ActionLink("Edit Country name", "EditCountryName", new { id = item.Id })
+        </div>
+
+    </td>
+
+    <td>
+        <div class="btn btn-success">
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </div>
+    </td>
+</tr>
+    }
+</table>
